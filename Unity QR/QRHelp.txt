@@ -1,0 +1,3 @@
+1. Add the .dll file in 'Assets/Plugins' folder
+
+2. using ZXing; - To start using the plugin
