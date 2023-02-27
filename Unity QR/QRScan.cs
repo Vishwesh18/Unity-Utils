@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using ZXing;
 using TMPro;
 
-public class QRCodeHandler : MonoBehaviour
+public class QRScan : MonoBehaviour
 {
     [SerializeField]
     private RawImage _rawImageBackground;
