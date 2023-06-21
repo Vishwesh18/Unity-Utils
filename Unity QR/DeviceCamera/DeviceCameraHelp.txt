@@ -1,0 +1,7 @@
+1. 
+-  DeviceCameraController -> Uses WebCamTexture for device camera. It has methods for permissions too.
+
+2.
+-  MyNativeBindings is used for direcly go to SYSTEM SETTINGS (permissions screen)
+-  Add the MyNativeBindings.mm file in 'Assets/Plugins/iOS' folder
+-  Call the "OpenSettings" method from external scripts to use it.

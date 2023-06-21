@@ -1,3 +1,17 @@
+TO START, 
+
 1. Add the .dll file in 'Assets/Plugins' folder
 
 2. using ZXing; - To start using the plugin
+
+
+FOR QR READ 
+
+1. Use the DeviceCameraController to use camera
+
+2. Then use the texture to read data from QR (through QRReader.cs file)
+
+
+FOR QR GENERATE 
+
+1. Simply use the QRCodeGenerator.cs file 
