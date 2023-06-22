@@ -1,0 +1,12 @@
+TO START, 
+
+1. Download the latest SDK - https://firebase.google.com/download/unity#:~:text=you%20can%20download%20the%20firebase%20unity%20sdk%20again%20at%20any%20time.
+
+2. Import the needed packages into the Unity project
+
+3. Import FirebaseManager, desired Wrapper Classes and FirebasePathKeys(*1)
+
+
+P.S 
+
+(*1) -  This is for organising purpose only
