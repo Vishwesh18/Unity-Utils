@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Firebase.Auth;
 using Firebase.Database;
-using Leguar.TotalJSON;
 using UnityEngine;
 
 public class FirebaseManager : Singleton<FirebaseManager>
@@ -10,7 +9,8 @@ public class FirebaseManager : Singleton<FirebaseManager>
     public void ExamplePostMethod(Action<string> callback)
     {
         string path = CreatePath(FirebasePathKeys.exampleKey);
-        FirebaseDatabaseWrapper.PostValue<string>(path, (resultString) =>
+        string dummyData = "Dummy";
+        FirebaseDatabaseWrapper.PostValue<string>(path, dummyData, (resultString) =>
         {
             callback?.Invoke(resultString);
         });
