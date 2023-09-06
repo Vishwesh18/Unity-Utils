@@ -1,0 +1,48 @@
+TO START : 
+
+Install Unity Localization Package from 'Package Manager'
+
+Then create Localization settings
+
+Follow that with creating required Locales
+
+
+
+SCRIPTS :
+
+- Then Import all these scripts.
+
+
+LocaleSelector & LocalizationManager -> IMPORTANT!
+
+LocalizedTextUpdater -> More of helper. Use this to automatically update TMPro in Update Event
+
+LocalizationConstant -> More of Organiser. Use for Table names and Entry keys
+
+
+
+IMPORTANT STEP : 
+
+Use Localization in the BUILD
+
+- Window -> Asset Management -> Addressables -> Groups 
+
+Do “New Build”.
+
+(If you already have it, Update it)
+
+
+IMPORTING CSV : 
+
+https://docs.unity3d.com/Packages/com.unity.localization@1.4/manual/CSV.html 
+
+Add “Extensions” -> CSV
+
+(So that you customise, field names and comments)
+
+
+You will have two buttons at the end.
+
+“Save” -> Save the table as CSV (Export)
+“Open” -> Import the CSV file (Import)
+￼
