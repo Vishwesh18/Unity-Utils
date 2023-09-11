@@ -12,7 +12,11 @@ public class LocalizedTextUpdater : MonoBehaviour
     {
         _localizeStringEvent = GetComponent<LocalizeStringEvent>();
         _textComponent = GetComponent<TMP_Text>();
+    }
 
+    private void Start()
+    {
+        _textComponent.text = _localizeStringEvent.StringReference.GetLocalizedString();
     }
 
     private void OnEnable()
@@ -23,7 +27,7 @@ public class LocalizedTextUpdater : MonoBehaviour
         });
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _localizeStringEvent.OnUpdateString.RemoveAllListeners();
     }
