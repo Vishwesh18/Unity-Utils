@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
 
 public static class ExtensionMethods
 {
@@ -168,5 +170,69 @@ public static class ColorExtensions
         return color;
     }
 
+    public static Color RandomColor(this string dummy)
+    {
+        System.Random random = new System.Random();
+
+        // Generate random values for red, green, and blue components
+        float r = (float)random.NextDouble(); // 0.0-1.0
+        float g = (float)random.NextDouble();
+        float b = (float)random.NextDouble();
+
+        // Create and return the color
+        return new Color(r, g, b);
+    }
+
 }
 #endregion
+
+public static class TweenExtensions
+{
+    public static Sequence DOLoadingTextAnimation(this TMP_Text text, string content, float interval = 1f, int loopsCount = -1)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        for (int i = 0; i < 4; i++)
+        {
+            string currentString = content + new string('.', i);
+
+            seq.AppendCallback(() =>
+            {
+                text.text = currentString;
+            });
+
+            seq.AppendInterval(interval);
+        }
+
+        seq.SetLoops(loopsCount);
+
+        return seq;
+    }
+
+    public static Sequence DOTypingAnimation(this TMP_Text tmpText, float customDuration = -1f)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        tmpText.maxVisibleCharacters = 0;
+        int totalCharacters = tmpText.text.Length;
+
+        float typingSpeed = 0.025f;
+        float duration = totalCharacters * typingSpeed;
+
+        if (customDuration != -1f)
+        {
+            duration = customDuration;
+        }
+
+        Tween tween = DOVirtual.Int(0, totalCharacters, duration, (currentCharacterCount) =>
+         {
+             tmpText.maxVisibleCharacters = currentCharacterCount;
+         });
+        tween.SetEase(Ease.OutSine);
+
+        seq.Append(tween);
+
+        return seq;
+    }
+
+}
