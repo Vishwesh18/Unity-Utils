@@ -2,46 +2,24 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
-public class CursorHandler : Singleton<CursorHandler>, IPointerEnterHandler, IPointerExitHandler, IDeselectHandler
+public class CursorHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDeselectHandler
 {
     [SerializeField] private bool isButton = true;
+    [SerializeField] private bool defaultCursorOnClick = true;
     [SerializeField] private CursorType cursorType;
-
-    private Vector2 cursorHotspot = new Vector2(6, 2);
 
     private Button _button;
     private bool _hasButtonComponent = false;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         cursorType = isButton ? CursorType.ButtonCursor : CursorType.TextCursor;
-        cursorHotspot = cursorType == CursorType.ButtonCursor ? new Vector2(6, 2) : Vector2.zero;
+        // currentCursorHotspot = cursorType == CursorType.ButtonCursor ? cursorHotspotForButton : cursorHotspotForText;
 
         //ConfigureEvents();
 
         _hasButtonComponent = transform.TryGetComponent<Button>(out _button);
     }
-
-    #region SET METHODS
-
-    public void SetButtonCursor()
-    {
-        Cursor.SetCursor(ResourceManager.Instance.buttonCursor, cursorHotspot, CursorMode.Auto);
-    }
-
-    public void SetTextCursor()
-    {
-        Cursor.SetCursor(ResourceManager.Instance.textCursor, cursorHotspot, CursorMode.Auto);
-    }
-
-    public static void SetDefaultCursor()
-    {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-    }
-
-    #endregion
 
     #region EVENTS HANDLING
 
@@ -51,22 +29,28 @@ public class CursorHandler : Singleton<CursorHandler>, IPointerEnterHandler, IPo
         {
             if (_hasButtonComponent && !_button.interactable) return;
 
-            SetButtonCursor();
+            CursorManager.SetButtonCursor();
         }
         else
         {
-            SetTextCursor();
+            CursorManager.SetTextCursor();
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        SetDefaultCursor();
+        CursorManager.SetDefaultCursor();
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        SetDefaultCursor();
+        CursorManager.SetDefaultCursor();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (defaultCursorOnClick)
+            CursorManager.SetDefaultCursor();
     }
 
     #endregion
